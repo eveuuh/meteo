@@ -1,4 +1,4 @@
 
-[!meteo](meteo.png)
+![meteo](meteo.png)
 
 
