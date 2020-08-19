@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 14px;
+    color: #333;
+    font-weight: normal;
+    font-family: 'Montserrat', sans-serif;
+}
+body {
+    padding: 0 200px;
+}
+.h1 {
+    font-size: 40px;
+    padding: 1em 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.h2 { 
+    font-size: 32px;
+    text-align: center;
+}
+.wow {
+    font-size: 6em;
+    font-style: italic;
+}
+
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+    font-size: 20px;
+    margin-top:55px;
+    margin-bottom: 40px;
+
+    
+ 
+}
+
+input {
+    color:grey;
+    border:2px solid;
+    height: 40px;
+    width: 320px;
+    display: inline;
+    border-radius: 10px;
+
+}
+
+::placeholder {
+    font-size:14px;
+    color:black;
+    text-align: center;
+}
+.champs {
+    text-align: center;
+    margin: 10px;
+    
+}
+.image {
+    text-align: center;
+    margin :20px;
+}
+
+.wow {
+    text-align: left;
+}
+
+.fa-heart {
+    color:red;
+}
+
+#api-response {
+    text-align: center;
+}

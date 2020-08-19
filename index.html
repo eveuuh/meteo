@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Mon application en AJAX LOL</title>
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <h1 class="h1">Ma super app météo <i class="fa fa-heart"></i></h1> 
+        <h2 class="h2">Voici le bulletin prévisionnel du jour :) </h2>
+        
+        <div class="champs">
+            <label for="name">Quelle ville cherchez vous ?</label>
+            <input type="text" id="name" name="name"  placeholder="Entrez une ville"  size="10">
+            <input type="submit" id ="button" value="rechercher">
+        </div>
+        
+
+
+        <div class="image">
+            <img src="https://img.20mn.fr/5Tz4Qx1EQaCduyH13tNdrQ/830x532_tatiana-silva-presente-meteo-tf1-depuis-mars-2017.jpg">;
+        </div>
+        
+        <!-- Div dans laquelle on veut afficher les réponses de notre API -->
+        <div id="api-response">
+            <span class="wow" id="temp"></span>°C<br>
+            <span class="wow" id="pressure"></span>hPa <br>
+            <span class="wow" id="humidity"></span>%<br>
+
+        </div>
+        
+        <script src="main.js"></script>
+        
+        <script>
+            /*  méthode qui permet d'afficher la réponse d'une API à une requête donnée */
+           
+
+            /*  méthode qui permet de récupérer la réponse d'une requête AJAX
+                et de traiter le résultat lorsqu'elle l'aura reçu au moyen d'un "callback",
+                c'est à dire une fonction qui sera exécutée lors de la réception de la réponse.
+                Dans l'exemple ci-dessous, on demande la météo, en méthode "GET", puis on affiche "Pouet pouet"
+                à l'écran au moyen d'une méthode passée en troisième argument (stupide mais simple pour commencer à comprendre).
+                Dans l'exemple d'après, on demande la météo en méthode "GET", puis on précise que
+                lorsque l'on aura la réponse, on doit exécuter la fonction, qui prend en paramètre
+                le contenu même de la réponse (cf l'appel à "callbackFunction()" dans main.js.
+                ici, nous voulons tout simplement afficher la réponse telle qu'elle est renvoyée par
+                le serveur (ie. une chaine de caractères), puis on la convertit en Json pour
+                l'afficher à nouveau, dans un format plus simple à manipuler.
+             */
+                function searchByCity(name) { 
+                    
+
+                    
+                    sendQueryWithCallback(
+                        "http://api.openweathermap.org/data/2.5/weather?q="+name+"&appid=79fc85c37ddd74634038e4a37c1125c2",              
+                                  'GET',
+                        (response) => {
+                            console.log('Réponse de l\'api au format String', response);
+                            response = JSON.parse(response);
+                            console.log('Réponse de l\'api au format Json', response);
+                            console.log(response.main.temp);  
+                            
+                            document.getElementById("temp").innerHTML = "La temperature est de" + '' + Math.round(response.main.temp - 273);
+                            document.getElementById("pressure").innerHTML = "La pression est de" + '' + response.main.pressure;
+                            document.getElementById("humidity").innerHTML = "L'humidité est de " + '' + response.main.humidity;
+                            //setInterval(sendQueryWithCallback,5000);
+
+                           
+                            
+                        }
+                    );
+      
+                }
+                //searchByCity("paris");
+                              
+                let submitButton = document.getElementById("button");
+                submitButton.addEventListener("click", () => {
+                    let cityName =document.getElementById("name").value;
+                    searchByCity(cityName);    
+                }
+                )
+                
+        </script>
+    </body>
+</html>
